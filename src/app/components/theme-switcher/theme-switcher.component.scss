@@ -1,0 +1,25 @@
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  lucide-icon {
+    &.filled {
+      fill: currentColor;
+    }
+  }
+
+  .label {
+    letter-spacing: 0.3px;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
