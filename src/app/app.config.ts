@@ -13,8 +13,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
-    provideEffects([CountryEffects]), 
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideStore({ countries: countryReducer }),
+    provideEffects([CountryEffects]), 
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
   ]
 };

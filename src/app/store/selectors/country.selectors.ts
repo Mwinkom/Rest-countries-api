@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { CountryState } from "../state/country.state";
 
-export const selectCountryState = createFeatureSelector<CountryState>("country");
+export const selectCountryState = createFeatureSelector<CountryState>("countries");
 
 export const selectAllCountries = createSelector(
     selectCountryState,

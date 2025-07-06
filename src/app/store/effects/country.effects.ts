@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { CountryApiService } from "../../services/country-api.service";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as CountryActions from '../actions/country.actions';
@@ -6,11 +6,8 @@ import { catchError, map, mergeMap, of } from 'rxjs';
 
 @Injectable()
 export class CountryEffects {
-
-  constructor(
-    private actions$: Actions,
-    private countryService: CountryApiService
-  ) {}
+  private actions$ = inject(Actions);
+  private countryService = inject(CountryApiService);
 
   loadCountries$ = createEffect(() =>
     this.actions$.pipe(
