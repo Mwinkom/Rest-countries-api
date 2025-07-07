@@ -1,59 +1,144 @@
-# CountriesApi
+# Countries API Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.14.
+## Project Description
+A modern Angular application that displays country information using the REST Countries API. Features include country search, region filtering, detailed country views, and dark/light theme switching with NgRx state management.
 
-## Development server
+## Setup & Run Instructions
 
-To start a local development server, run:
-
+### Installation
 ```bash
+# Create angular application
+ng new countries-api
+
+# Start development server
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Navigate to `http://localhost:4200/` to view the application.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
+### Build for Production
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Application Features
 
-## Running unit tests
+- **Country List**: Display all countries with flags, population, region, and capital
+- **Search Functionality**: Search countries by name with real-time filtering
+- **Region Filter**: Filter countries by continent/region
+- **Country Details**: Detailed view with native name, currencies, languages, and border countries
+- **Theme Switching**: Toggle between dark and light modes
+- **Responsive Design**: Mobile-first responsive layout
+- **State Management**: NgRx for centralized state management
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Component Structure
 
-```bash
-ng test
+### Core Components
+- **AppComponent**: Root component with navigation and theme switcher
+- **CountryListComponent**: Displays grid of country cards with search/filter
+- **CountryDetailsComponent**: Shows detailed country information
+- **SearchFilterComponent**: Handles search input and region filtering
+- **ThemeSwitcherComponent**: Toggle between light/dark themes
+
+### Services
+- **CountryApiService**: HTTP client for REST Countries API
+- **ErrorHandlerService**: Centralized error handling
+
+## Routing Overview
+
+```typescript
+const routes: Routes = [
+   { 
+    path: '', 
+    loadComponent: () => 
+        import('./components/country-list/country-list.component').then(m => m.CountryListComponent)
+  },
+  { 
+    path: 'country/:code', 
+    loadComponent: () => 
+        import('./components/country-details/country-details.component').then(m => m.CountryDetailsComponent)
+  },
+  { 
+    path: '**', 
+    redirectTo: '' 
+  }
+];
 ```
 
-## Running end-to-end tests
+- **/** - Home page with country list and search/filter
+- **/country/:code** - Country details page using country code (cca3)
+- **Wildcard** - Redirects to home for invalid routes
 
-For end-to-end (e2e) testing, run:
+## API Consumption
 
-```bash
-ng e2e
+### REST Countries API Integration
+- **Base URL**: `https://restcountries.com/v3.1`
+- **Endpoints Used**:
+  - `/all` - Get all countries
+  - `/alpha/{code}` - Get country by code
+  - `/alpha?codes={codes}` - Get multiple countries by codes
+
+### API Fields
+- Country list: `name,flags,population,region,capital,cca3`
+- Country details: `name,flags,population,region,subregion,capital,cca3,tld,currencies,languages,borders`
+
+## NgRx Store Implementation
+
+### State Structure
+```typescript
+interface CountryState {
+  countries: Country[];
+  selectedCountry: Country | null;
+  loading: boolean;
+  error: string | null;
+  searchQuery: string;
+  filterRegion: string;
+}
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Actions
+- `loadCountries` - Load all countries
+- `loadCountryByCode` - Load specific country
+- `setSearchQuery` - Update search filter
+- `setFilterRegion` - Update region filter
 
-## Additional Resources
+### Effects
+- **CountryEffects**: Handle API calls and side effects
+- Manages loading states and error handling
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Selectors
+- `selectAllCountries` - Get all countries
+- `selectFilteredCountries` - Get filtered countries based on search/region
+- `selectSelectedCountry` - Get currently selected country
+- `selectLoading` - Get loading state
+
+## Theme Switching Implementation
+
+### CSS Custom Properties
+```scss
+:root {
+  --bg-color: #{$light-bg};
+  --text-color: #{$light-text};
+  --element-color: #{$light-elements};
+}
+
+body.dark-theme {
+  --bg-color: #{$dark-bg};
+  --text-color: #{$dark-text};
+  --element-color: #{$dark-elements};
+}
+```
+
+### Theme Management
+- Theme state stored in localStorage
+- Body class toggling for theme switching
+- Custom icons for light/dark modes
+- Reactive theme switching across all components
+
+## Git Workflow
+
+### Branching Strategy
+- **main**: Production-ready code
+- **develop**: Integration branch for features
+- **feature/***: Individual feature branches
+
