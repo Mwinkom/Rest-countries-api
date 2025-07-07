@@ -23,7 +23,7 @@ export class CountryApiService {
   }
 
   getCountryByCode(code: string): Observable<Country[]> {
-    return this.http.get<Country[]>(`${this.apiUrl}/alpha/${code}?fields=name,flags,population,region,capital,cca3`).pipe(
+    return this.http.get<Country[]>(`${this.apiUrl}/alpha/${code}?fields=name,flags,population,region,subregion,capital,cca3,tld,currencies,languages,borders`).pipe(
       catchError(error => this.errorHandler.handleHttpError(error))
     );
   }

@@ -1,1 +1,47 @@
-<p>country-details works!</p>
+<div class="details" *ngIf="(country$ | async) as country; else loading">
+  <button class="back" (click)="goBack()">← Back</button>
+
+  <div class="content">
+    <img [src]="country.flags.svg" [alt]="country.name.common" />
+
+    <div class="info">
+      <h2>{{ country.name.common }}</h2>
+
+      <div class="data-columns">
+        <div class="column">
+          <p><strong>Native Name:</strong> {{ getFirstValue(country.name.nativeName) }}</p>
+          <p><strong>Population:</strong> {{ country.population | number }}</p>
+          <p><strong>Region:</strong> {{ country.region }}</p>
+          <p><strong>Sub Region:</strong> {{ country.subregion }}</p>
+          <p><strong>Capital:</strong> {{ country.capital?.[0] || 'N/A' }}</p>
+        </div>
+        <div class="column">
+          <p><strong>Top Level Domain:</strong> {{ country.tld?.[0] || 'N/A' }}</p>
+          <p><strong>Currencies:</strong> {{ getCurrencyString(country.currencies) }}</p>
+          <p><strong>Languages:</strong> {{ getLanguages(country.languages) }}</p>
+        </div>
+      </div>
+
+      <div class="borders" *ngIf="country.borders?.length">
+        <strong>Border Countries:</strong>
+        <div class="border-list">
+          <button *ngFor="let border of country.borders" (click)="viewBorder(border)">
+            {{ getBorderCountryName(border) }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div *ngIf="(loading$ | async); else error">
+    <p>Loading country details...</p>
+  </div>
+  <ng-template #error>
+    <div class="error" *ngIf="error$ | async as errorMsg">
+      <p>Error: {{ errorMsg }}</p>
+      <button (click)="goBack()">← Back to Countries</button>
+    </div>
+  </ng-template>
+</ng-template>
