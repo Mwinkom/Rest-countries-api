@@ -4,11 +4,11 @@
   [attr.aria-pressed]="isDarkMode"
   aria-label="Toggle between dark and light theme">
 
-  <lucide-icon 
-    [img]="MoonIcon" 
-    [class.filled]="isDarkMode"
-    size="16">
-  </lucide-icon>
+  <img 
+    [src]="isDarkMode ? '/moon-icon-filled.svg' : '/moon-icon-outline.svg'"
+    alt="Moon icon"
+    width="16"
+    height="16">
 
   <span class="label">Dark Mode</span>
 </button>

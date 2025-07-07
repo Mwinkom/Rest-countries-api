@@ -22,3 +22,27 @@ export const selectError = createSelector(
     selectCountryState,
     (state: CountryState) => state.error
 );
+
+export const selectSearchQuery = createSelector(
+    selectCountryState,
+    (state: CountryState) => state.searchQuery
+);
+
+export const selectFilterRegion = createSelector(
+    selectCountryState,
+    (state: CountryState) => state.filterRegion
+);
+
+export const selectFilteredCountries = createSelector(
+    selectAllCountries,
+    selectSearchQuery,
+    selectFilterRegion,
+    (countries, searchQuery, filterRegion) => {
+        return countries.filter(country => {
+            const matchesSearch = !searchQuery || 
+                country.name.common.toLowerCase().includes(searchQuery.toLowerCase());
+            const matchesRegion = !filterRegion || country.region === filterRegion;
+            return matchesSearch && matchesRegion;
+        });
+    }
+);

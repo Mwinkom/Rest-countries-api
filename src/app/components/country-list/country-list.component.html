@@ -1,3 +1,9 @@
+<app-search-filter
+  (searchChange)="onSearch($event)"
+  (regionChange)="onRegionChange($event)"
+></app-search-filter>
+
+
 <section class="country-list">
   <div class="grid" *ngIf="(countries$ | async) as countries; else loading">
     <div class="card" *ngFor="let country of countries" [routerLink]="['/country', country.cca3]">

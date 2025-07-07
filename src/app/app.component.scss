@@ -1,10 +1,10 @@
 @use "../styles/variables" as *;
 
 .navbar {
-  background-color: var(--bg-color);
+  background-color: var(--element-color);
   color: var(--text-color);
   padding: 1rem 1.2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 5.62%);
 
   @media (min-width: $breakpoint-lg) {
       padding: 1rem 5rem;
@@ -12,7 +12,7 @@
   
   .container {
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     align-items: center;
     max-width: 1280px;
     margin: 0 auto;
@@ -23,7 +23,7 @@
     font-weight: 750;
     color: inherit;
 
-    @media (min-width: $breakpoint-lg) {
+    @media (min-width: $breakpoint-md) {
       font-size: 1.2rem;
     }    
   }

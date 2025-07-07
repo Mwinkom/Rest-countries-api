@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { LucideAngularModule, Moon } from 'lucide-angular';
 
 @Component({
   selector: 'app-theme-switcher',
-  imports: [LucideAngularModule],
+  imports: [],
   templateUrl: './theme-switcher.component.html',
   styleUrl: './theme-switcher.component.scss'
 })
 export class ThemeSwitcherComponent implements OnInit {
-  readonly MoonIcon = Moon;
   isDarkMode = false;
 
   ngOnInit(): void {
