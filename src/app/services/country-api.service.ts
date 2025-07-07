@@ -17,20 +17,20 @@ export class CountryApiService {
   ) {}
 
   getAllCountries(): Observable<Country[]> {
-    return this.http.get<Country[]>(`${this.apiUrl}/all`).pipe(
+    return this.http.get<Country[]>(`${this.apiUrl}/all?fields=name,flags,population,region,capital,cca3`).pipe(
       catchError(error => this.errorHandler.handleHttpError(error))
     );
   }
 
   getCountryByCode(code: string): Observable<Country[]> {
-    return this.http.get<Country[]>(`${this.apiUrl}/alpha/${code}`).pipe(
+    return this.http.get<Country[]>(`${this.apiUrl}/alpha/${code}?fields=name,flags,population,region,capital,cca3`).pipe(
       catchError(error => this.errorHandler.handleHttpError(error))
     );
   }
 
   getCountriesByCodes(codes: string[]): Observable<Country[]> {
     const joined = codes.join(',');
-    return this.http.get<Country[]>(`${this.apiUrl}/alpha?codes=${joined}`).pipe(
+    return this.http.get<Country[]>(`${this.apiUrl}/alpha?codes=${joined}&fields=name,flags,population,region,capital,cca3`).pipe(
       catchError(error => this.errorHandler.handleHttpError(error))
     );
   }

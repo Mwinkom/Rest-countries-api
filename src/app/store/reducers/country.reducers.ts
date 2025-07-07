@@ -6,7 +6,9 @@ const initialState: CountryState = {
   countries: [],    
   selectedCountry: null,
   loading: false,
-  error: null
+  error: null,
+  searchQuery: '',
+  filterRegion: ''
 };
 
 export const countryReducer = createReducer(
@@ -30,5 +32,13 @@ export const countryReducer = createReducer(
   on(CountryActions.selectCountry, (state, { country }) => ({
     ...state,
     selectedCountry: country
+  })),
+  on(CountryActions.setSearchQuery, (state, { searchQuery }) => ({
+    ...state,
+    searchQuery
+  })),
+  on(CountryActions.setFilterRegion, (state, { filterRegion }) => ({
+    ...state,
+    filterRegion
   }))
 );

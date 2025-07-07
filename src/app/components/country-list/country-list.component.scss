@@ -1,0 +1,65 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.country-list {
+  padding: 0 1.2rem 1.2rem;
+
+   @media (min-width: $breakpoint-lg) {
+     padding: 0 5rem 5rem;
+   }
+
+  .grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+
+    @media (min-width: $breakpoint-sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      gap: 3.5rem;
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .card {
+    @include card;
+    overflow: hidden;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+
+      h2 {
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+      }
+
+      p {
+        margin: 0.25rem 0;
+        font-size: 0.9rem;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  .loading {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 4rem 0;
+  }
+}

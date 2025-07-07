@@ -5,4 +5,6 @@ export interface CountryState {
   selectedCountry: Country | null;
   loading: boolean;
   error: string | null;
+  searchQuery: string;
+  filterRegion: string;
 }

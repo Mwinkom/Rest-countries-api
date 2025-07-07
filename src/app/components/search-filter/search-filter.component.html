@@ -1,0 +1,19 @@
+<div class="search-filter">
+  <div class="search-input-wrapper">
+    <img class="search-icon" src="/search-light-mode.svg" alt="Search" />
+    <input
+      type="text"
+      placeholder="Search for a country..."
+      [(ngModel)]="search"
+      (ngModelChange)="searchChange.emit($event)"
+    />
+  </div>
+
+  <div class="select-wrapper">
+    <select [(ngModel)]="region" (ngModelChange)="regionChange.emit($event)">
+      <option value="">Filter by Region</option>
+      <option *ngFor="let r of regions" [value]="r">{{ r }}</option>
+    </select>
+    <img class="expand-icon" [src]="isDarkMode ? '/expand-dark-mode.svg' : '/expand-light-mode.svg'" alt="Expand" />
+  </div>
+</div>

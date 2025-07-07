@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+:root {
+  --bg-color: #fafafa;
+  --text-color: #111517;
+  --element-color: #ffffff;
+}
+
+body.dark-theme {
+  --bg-color: #202c37;
+  --text-color: #ffffff;
+  --element-color: #2B3844;
+}
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
